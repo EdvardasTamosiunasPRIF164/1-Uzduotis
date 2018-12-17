@@ -1,7 +1,7 @@
 
 
 import checker.Saske
-import checker.Saskesej
+import checker.SaskesEjimas
 import checker.SaskesSpalv
 
 class Lenta {
@@ -36,11 +36,8 @@ class Lenta {
         return lenta
     }
 
-    fun getLenta(): Lenta {
-        return this
-    }
 
-    fun makeMove(checkerMove: Saskesej){
+    fun makeMove(checkerMove: SaskesEjimas){
         makeMove(checkerMove.r1,checkerMove.c1,checkerMove.r2,checkerMove.c2)
     }
 

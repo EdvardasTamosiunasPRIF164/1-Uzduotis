@@ -5,7 +5,7 @@ class Lang(var saske: Saske? = null) {
     fun printOccupation(){
         when(isOccupied()){
             true ->{
-                saske?.printSaske()
+                saske?.printSaske(saske!!.saskesSpalv)
             }
             false ->{
                 print("_")

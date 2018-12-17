@@ -1,6 +1,4 @@
-import checker.Saske
-import checker.Saskesej
-import checker.SaskesSpalv
+import checker.SaskesEjimas
 import java.util.*
 
 object Main {
@@ -39,17 +37,19 @@ object Main {
                 }
 
             }else{
-                println("ERROR")
-                return
+                game.Lenta.printBoard()
+                printInvalidMove()
+
             }
         }
     }
 
     fun printInvalidMove(){
+        println(" ")
         println("Incorrect move")
     }
 
-    fun getMoveFromUserInput(r1: String, c1: String,destinationRow: String, destinationColumn: String): Saskesej? {
+    fun getMoveFromUserInput(r1: String, c1: String,destinationRow: String, destinationColumn: String): SaskesEjimas? {
         val number = arrayOf("8","7","6","5","4","3","2","1")
         val letters = arrayOf("A","B","C","D","E","F","G","H")
         val columnIndex = getItemIndex(c1, letters)
@@ -60,7 +60,7 @@ object Main {
             rowIndex?.let {
                 destColumnIndex?.let {
                     destRowIndex?.let {
-                        return Saskesej (rowIndex, columnIndex, destRowIndex, destColumnIndex)
+                        return SaskesEjimas (rowIndex, columnIndex, destRowIndex, destColumnIndex)
                     }
                 }
             }

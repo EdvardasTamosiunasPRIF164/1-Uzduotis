@@ -1,5 +1,5 @@
 import checker.Saske
-import checker.Saskesej
+import checker.SaskesEjimas
 import checker.SaskesSpalv
 import java.util.*
 
@@ -7,12 +7,12 @@ class Game {
     val Lenta = Lenta()
     var isGameOn = false
     var currentPlayer: Saske = Saske(SaskesSpalv.RED)
-    fun getLegalMoves(player: Saske): Array<Saskesej?>? {
+    fun getLegalMoves(player: Saske): Array<SaskesEjimas?>? {
 
         if (player.saskesSpalv != SaskesSpalv.RED && player.saskesSpalv != SaskesSpalv.BLACK)
             return null
 
-        val moves = Vector<Saskesej>() // Moves will be stored in this vector.
+        val moves = Vector<SaskesEjimas>()
 
 
 
@@ -21,19 +21,19 @@ class Game {
                 if (Lenta.getBoardAsArray()[row][col].saske?.saskesSpalv == player.saskesSpalv) {
                     if (canJump(player, row, col, row + 1, col + 1, row + 2,
                                     col + 2))
-                        moves.addElement(Saskesej(row, col, row + 2,
+                        moves.addElement(SaskesEjimas(row, col, row + 2,
                                 col + 2))
                     if (canJump(player, row, col, row - 1, col + 1, row - 2,
                                     col + 2))
-                        moves.addElement(Saskesej(row, col, row - 2,
+                        moves.addElement(SaskesEjimas(row, col, row - 2,
                                 col + 2))
                     if (canJump(player, row, col, row + 1, col - 1, row + 2,
                                     col - 2))
-                        moves.addElement(Saskesej(row, col, row + 2,
+                        moves.addElement(SaskesEjimas(row, col, row + 2,
                                 col - 2))
                     if (canJump(player, row, col, row - 1, col - 1, row - 2,
                                     col - 2))
-                        moves.addElement(Saskesej (row, col, row - 2,
+                        moves.addElement(SaskesEjimas (row, col, row - 2,
                                 col - 2))
                 }
             }
@@ -46,16 +46,16 @@ class Game {
                 for (col in 0..7) {
                     if (Lenta.getBoardAsArray()[row][col].saske?.saskesSpalv == player.saskesSpalv) {
                         if (canMove(player, row, col, row + 1, col + 1))
-                            moves.addElement(Saskesej(row, col,
+                            moves.addElement(SaskesEjimas(row, col,
                                     row + 1, col + 1))
                         if (canMove(player, row, col, row - 1, col + 1))
-                            moves.addElement(Saskesej(row, col,
+                            moves.addElement(SaskesEjimas(row, col,
                                     row - 1, col + 1))
                         if (canMove(player, row, col, row + 1, col - 1))
-                            moves.addElement(Saskesej (row, col,
+                            moves.addElement(SaskesEjimas (row, col,
                                     row + 1, col - 1))
                         if (canMove(player, row, col, row - 1, col - 1))
-                            moves.addElement(Saskesej (row, col,
+                            moves.addElement(SaskesEjimas (row, col,
                                     row - 1, col - 1))
                     }
                 }
@@ -67,13 +67,13 @@ class Game {
         return if (moves.size == 0)
             null
         else {
-            val moveArray = arrayOfNulls<Saskesej>(moves.size)
+            val moveArray = arrayOfNulls<SaskesEjimas>(moves.size)
             for (i in moves.indices)
-                moveArray[i] = moves.elementAt(i) as Saskesej
+                moveArray[i] = moves.elementAt(i) as SaskesEjimas
             moveArray
         }
 
-    } // end getLegalMoves
+    }
 
     private fun canJump(player: Saske, r1: Int, c1: Int, r2: Int, c2: Int, r3: Int,
                         c3: Int): Boolean {
@@ -117,7 +117,7 @@ class Game {
 
     }
 
-    fun checkIfMoveIsLegit(userMove: Saskesej, legalMoves: Array<Saskesej?>?): Boolean{
+    fun checkIfMoveIsLegit(userMove: SaskesEjimas, legalMoves: Array<SaskesEjimas?>?): Boolean{
         legalMoves?.forEach {
             it?.let {saskesej ->
                 if (userMove == saskesej){
@@ -128,7 +128,7 @@ class Game {
         return false
     }
 
-    fun doMakeMove(move: Saskesej) {
+    fun doMakeMove(move: SaskesEjimas) {
 
         Lenta.makeMove(move)
 
@@ -192,29 +192,29 @@ class Game {
         isGameOn = false
     }
 
-    fun getLegalJumpsFrom(player: Saske, row: Int, col: Int): Array<Saskesej?>? {
+    fun getLegalJumpsFrom(player: Saske, row: Int, col: Int): Array<SaskesEjimas?>? {
 
         if (player.saskesSpalv != SaskesSpalv.RED && player.saskesSpalv != SaskesSpalv.BLACK)
             return null
 
-        val moves = Vector<Saskesej>()
+        val moves = Vector<SaskesEjimas>()
         val cellsChecker = Lenta.getBoardAsArray()[row][col].saske
         if ( cellsChecker == player) {
             if (canJump(player, row, col, row + 1, col + 1, row + 2, col + 2))
-                moves.addElement(Saskesej(row, col, row + 2, col + 2))
+                moves.addElement(SaskesEjimas(row, col, row + 2, col + 2))
             if (canJump(player, row, col, row - 1, col + 1, row - 2, col + 2))
-                moves.addElement(Saskesej(row, col, row - 2, col + 2))
+                moves.addElement(SaskesEjimas(row, col, row - 2, col + 2))
             if (canJump(player, row, col, row + 1, col - 1, row + 2, col - 2))
-                moves.addElement(Saskesej(row, col, row + 2, col - 2))
+                moves.addElement(SaskesEjimas(row, col, row + 2, col - 2))
             if (canJump(player, row, col, row - 1, col - 1, row - 2, col - 2))
-                moves.addElement(Saskesej(row, col, row - 2, col - 2))
+                moves.addElement(SaskesEjimas(row, col, row - 2, col - 2))
         }
         if (moves.size == 0)
             return null
         else {
-            val moveArray = arrayOfNulls<Saskesej>(moves.size)
+            val moveArray = arrayOfNulls<SaskesEjimas>(moves.size)
             for (i in moves.indices)
-                moveArray[i] = moves.elementAt(i) as Saskesej
+                moveArray[i] = moves.elementAt(i) as SaskesEjimas
             return moveArray
         }
     }
